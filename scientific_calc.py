@@ -53,19 +53,24 @@ class Calc():
 		#print(END, value)
 
 	def valid_function(self):
-		if self.op == "add":
-			self.total += self.current
-		if self.op == "sub":
-			self.total -= self.current
-		if self.op == "multi":
-			self.total *= self.current
-		if self.op == "divide":
-			self.total /= self.current
-		if self.op == "mod":
-			self.total %= self.current
-		self.input_value = True
-		self.check_sum = False
-		self.display(self.total)
+
+		try:
+			if self.op == "add":
+				self.total += self.current
+			if self.op == "sub":
+				self.total -= self.current
+			if self.op == "multi":
+				self.total *= self.current
+			if self.op == "divide":
+				self.total /= self.current
+			if self.op == "mod":
+				self.total %= self.current
+			self.input_value = True
+			self.check_sum = False
+			self.display(self.total)
+		except ZeroDivisionError:
+			self.display('Error: division by zero')
+
 
 	def operation(self, op):
 		self.current = float(self.current)
@@ -141,9 +146,14 @@ class Calc():
 		self.display(self.current)
 	
 	def acosh(self):
-		self.result = False
-		self.current = math.acosh(float(txtDisplay.get()))
-		self.display(self.current)
+		try :
+			self.result = False
+			self.current = math.acosh(float(txtDisplay.get()))
+			self.display(self.current)
+
+		except ValueError:
+			self.display("Error : math domain error")
+
 
 	def sin(self):
 		self.result = False
